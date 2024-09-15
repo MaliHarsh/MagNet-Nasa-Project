@@ -1,9 +1,9 @@
 import os
 import pandas as pd
 
-def download():
+def download(data_dir = "data"):
+    
     # Create a data/ directory if it doesn't exist
-    data_dir = "data"
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
 
@@ -23,27 +23,3 @@ def download():
     else:
         print("Dataset already extracted.")
 
-    # Load and process CSV files
-    dst = pd.read_csv(os.path.join(extracted_folder, "dst_labels.csv"))
-    dst['timedelta'] = pd.to_timedelta(dst['timedelta'])
-    dst.set_index(["period", "timedelta"], inplace=True)
-
-    sunspots = pd.read_csv(os.path.join(extracted_folder, "sunspots.csv"))
-    sunspots['timedelta'] = pd.to_timedelta(sunspots['timedelta'])
-    sunspots.set_index(["period", "timedelta"], inplace=True)
-
-    solar_wind = pd.read_csv(os.path.join(extracted_folder, "solar_wind.csv"))
-    solar_wind['timedelta'] = pd.to_timedelta(solar_wind['timedelta'])
-    solar_wind.set_index(["period", "timedelta"], inplace=True)
-
-    satellite_positions = pd.read_csv(os.path.join(extracted_folder, "satellite_positions.csv"))
-
-    # Replace null values with the mean for numeric columns only
-    for df in [dst, sunspots, solar_wind, satellite_positions]:
-        numeric_cols = df.select_dtypes(include=['number']).columns
-        df[numeric_cols].fillna(df[numeric_cols].mean(), inplace=True)
-
-    return dst, sunspots, solar_wind, satellite_positions
-
-# Call the download function
-dst, sunspots, solar_wind, satellite_positions = download()
