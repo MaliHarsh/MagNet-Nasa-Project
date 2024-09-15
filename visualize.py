@@ -1,4 +1,5 @@
 from src.data_loader import download
+from src.preprocessing import import_Data
 
 def main():
 
@@ -6,6 +7,7 @@ def main():
   download()
 
   # Process the data and return the dataframes
+  import_Data()
 
   # Visualize the data
 
