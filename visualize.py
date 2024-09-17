@@ -1,6 +1,6 @@
 from src.data_loader import download
 from src.preprocessing import import_Data
-
+from src.visualize import 
 def main():
 
   # Download the data
