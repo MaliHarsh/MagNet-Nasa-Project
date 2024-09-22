@@ -22,7 +22,3 @@ def show_enhanced_visualization(data):
 
     fig.subplots_adjust(hspace=0.8)
     plt.tight_layout()
-
-  # Use the enhanced function on your selected columns
-  cols_to_plot = ["bx_gse", "bx_gsm", "bt", "density", "speed", "temperature"]
-  show_enhanced_visualization(solar_wind[cols_to_plot].iloc[:1000])
