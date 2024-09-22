@@ -25,7 +25,7 @@ def import_data():
   satelite_pos = pd.read_csv(DATA_PATH / "satellite_positions.csv")
   
   # Replace null values with the mean for each dataset
-  for df in [dst, sunspots, solar_wind, satellite_positions]:
+  for df in [dst, sunspots, solar_wind, satelite_pos]:
       numeric_cols = df.select_dtypes(include=['number']).columns
       df[numeric_cols].fillna(df[numeric_cols].mean(), inplace=True)
     
