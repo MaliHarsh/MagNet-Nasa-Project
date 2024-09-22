@@ -27,7 +27,8 @@ def import_Data():
   for df in [dst, sunspots, solar_wind, satellite_positions]:
       numeric_cols = df.select_dtypes(include=['number']).columns
       df[numeric_cols].fillna(df[numeric_cols].mean(), inplace=True)
-  return dst,sunspots,solar_wind
+    
+  return dst, sunspots, solar_wind
   
 
 
