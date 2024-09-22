@@ -1,7 +1,8 @@
 #MagNet-Nasa-Project
 from pathlib import Path
 import pandas as pd
-def import_Data():
+
+def import_data():
   # Define the data path
   DATA_PATH = Path("data")
   
