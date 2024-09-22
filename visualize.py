@@ -4,8 +4,8 @@ from src.visualization import show_enhanced_visualization
 
 def main():
 
-  # # Download the data
-  # download()
+  # Download the data
+  download()
 
   # Process the data and return the dataframes
   dst, sunspots, solar_wind = import_data()
