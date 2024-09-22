@@ -13,8 +13,6 @@ def ensure_directory_exists(dir_path):
     if not dir_path.exists():
         logging.info(f"Directory {dir_path} does not exist. Creating it.")
         dir_path.mkdir(parents=True, exist_ok=True)
-    else:
-        logging.info(f"Directory {dir_path} already exists.")
 
 def run_command(command):
     """
@@ -44,7 +42,7 @@ def extract_dataset_if_needed(dataset_path, extracted_folder):
     """
     if not extracted_folder.exists():
         logging.info("Extracting dataset...")
-        command = f'unzip {dataset_path} -d {extracted_folder.parent}'
+        command = f'unzip -o {dataset_path} -d {extracted_folder.parent}'  # Added the -o flag to overwrite without prompting
         run_command(command)
     else:
         logging.info("Dataset already extracted.")
