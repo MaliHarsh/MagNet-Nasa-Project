@@ -1,6 +1,7 @@
 from src.data_loader import download
 from src.preprocessing import import_Data
 from src.visualization import show_enhanced_visualization
+
 def main():
 
   # Download the data
