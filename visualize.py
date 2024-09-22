@@ -10,7 +10,7 @@ def main():
   dst, sunspots, solar_wind = import_Data()
 
   # Visualize the data
-  show_enhanced_visualization(data)
+  show_enhanced_visualization(dst, sunspots, solar_wind)
 
 if __name__== '__main__':
   main()
