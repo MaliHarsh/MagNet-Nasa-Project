@@ -22,7 +22,7 @@ def import_data():
   solar_wind.set_index(["period", "timedelta"], inplace=True)
   
   # Load the satelite_positions.csv dataset
-  satelite_pos = pd.read_csv(DATA_PATH / "satelite_positions.csv")
+  satelite_pos = pd.read_csv(DATA_PATH / "satellite_positions.csv")
   
   # Replace null values with the mean for each dataset
   for df in [dst, sunspots, solar_wind, satellite_positions]:
