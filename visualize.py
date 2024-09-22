@@ -1,5 +1,5 @@
 from src.data_loader import download
-from src.preprocessing import import_Data
+from src.preprocessing import import_data
 from src.visualization import show_enhanced_visualization
 
 def main():
@@ -8,7 +8,7 @@ def main():
   # download()
 
   # Process the data and return the dataframes
-  dst, sunspots, solar_wind = import_Data()
+  dst, sunspots, solar_wind = import_data()
 
   # Visualize the data  
   cols_to_plot = ["bx_gse", "bx_gsm", "bt", "density", "speed", "temperature"]
