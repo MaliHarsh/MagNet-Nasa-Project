@@ -1,8 +1,11 @@
-# Import necessary libraries
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 from pathlib import Path
+import logging
+
+# Set up logging configuration
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # MagNet-Nasa-Project
 def show_enhanced_visualization(data, save_dir="data/plots/"):
@@ -11,16 +14,15 @@ def show_enhanced_visualization(data, save_dir="data/plots/"):
     Includes line plots, histograms, and scatter plots.
     Saves the plots to the specified directory.
     """
-    # Set the style for the plots
     sns.set(style="whitegrid")
-    
+
     # Ensure the save directory exists
     save_path = Path(save_dir)
     save_path.mkdir(parents=True, exist_ok=True)
-    
+
     # Create a large figure with multiple subplots
     fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(18, 18), dpi=100)
-    colors = sns.color_palette("Set2", len(data.columns))  # Use Seaborn's color palette
+    colors = sns.color_palette("Set2", len(data.columns))
 
     # Plot 1: Line plots of each feature
     for i, key in enumerate(data.columns[:3]):  # First 3 features as line plots
@@ -33,8 +35,19 @@ def show_enhanced_visualization(data, save_dir="data/plots/"):
         )
         ax.set_xlabel("Index")
         ax.set_ylabel(key.capitalize())
-        ax.axvline(t_data.idxmax(), color='k', linestyle='--', lw=1, label=f"Max: {t_data.max():.2f}")
-        ax.axvline(t_data.idxmin(), color='grey', linestyle='--', lw=1, label=f"Min: {t_data.min():.2f}")
+
+        # Convert Timedelta to numeric format for axvline
+        if pd.api.types.is_timedelta64_dtype(t_data.index):
+            numeric_index = pd.to_numeric(t_data.index)
+
+            # Use converted numeric values for max/min locations
+            ax.axvline(numeric_index[t_data.idxmax()], color='k', linestyle='--', lw=1, label=f"Max: {t_data.max():.2f}")
+            ax.axvline(numeric_index[t_data.idxmin()], color='grey', linestyle='--', lw=1, label=f"Min: {t_data.min():.2f}")
+        else:
+            # Default behavior if index is not Timedelta
+            ax.axvline(t_data.idxmax(), color='k', linestyle='--', lw=1, label=f"Max: {t_data.max():.2f}")
+            ax.axvline(t_data.idxmin(), color='grey', linestyle='--', lw=1, label=f"Min: {t_data.min():.2f}")
+
         ax.legend(loc='best')
 
     # Plot 2: Histograms of the features
@@ -66,6 +79,3 @@ def show_enhanced_visualization(data, save_dir="data/plots/"):
     # Close the plot to free up memory
     plt.close(fig)
 
-# Example call to function with sample data
-# Assuming `data` is a pandas DataFrame
-# show_enhanced_visualization(data)
