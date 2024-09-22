@@ -7,7 +7,7 @@ def main():
   download()
 
   # Process the data and return the dataframes
-  import_Data()
+  dst, sunspots, solar_wind = import_Data()
 
   # Visualize the data
   show_enhanced_visualization(data)
