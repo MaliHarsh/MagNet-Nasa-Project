@@ -2,16 +2,22 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+from pathlib import Path
 
 # MagNet-Nasa-Project
-def show_enhanced_visualization(data):
+def show_enhanced_visualization(data, save_dir="data/plots/"):
     """
     Function to show enhanced visualizations for the given dataset.
     Includes line plots, histograms, and scatter plots.
+    Saves the plots to the specified directory.
     """
     # Set the style for the plots
     sns.set(style="whitegrid")
-
+    
+    # Ensure the save directory exists
+    save_path = Path(save_dir)
+    save_path.mkdir(parents=True, exist_ok=True)
+    
     # Create a large figure with multiple subplots
     fig, axes = plt.subplots(nrows=3, ncols=3, figsize=(18, 18), dpi=100)
     colors = sns.color_palette("Set2", len(data.columns))  # Use Seaborn's color palette
@@ -51,4 +57,15 @@ def show_enhanced_visualization(data):
     # Adjust layout to avoid overlap
     fig.subplots_adjust(hspace=0.4, wspace=0.4)
     plt.tight_layout()
-    plt.show()
+
+    # Save the figure to the specified directory
+    plot_file = save_path / "enhanced_visualization.png"
+    plt.savefig(plot_file)
+    logging.info(f"Plots saved to {plot_file}")
+
+    # Close the plot to free up memory
+    plt.close(fig)
+
+# Example call to function with sample data
+# Assuming `data` is a pandas DataFrame
+# show_enhanced_visualization(data)
