@@ -9,8 +9,11 @@ def main():
   # Process the data and return the dataframes
   dst, sunspots, solar_wind = import_Data()
 
-  # Visualize the data
-  show_enhanced_visualization(dst, sunspots, solar_wind)
+  # Visualize the data  
+  cols_to_plot = ["bx_gse", "bx_gsm", "bt", "density", "speed", "temperature"]
+  show_enhanced_visualization(solar_wind[cols_to_plot].iloc[:1000])
+
+  
 
 if __name__== '__main__':
   main()
